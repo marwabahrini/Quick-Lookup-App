@@ -1,0 +1,32 @@
+[
+  {
+    "MBOLevel": "D",
+    "Participant": "Vera Voorbeeld",
+    "Enthusiasm": 4.8,
+    "Reliability": 2.4,
+    "Total":"4.0"
+  },
+  {
+    "Participant": "Donald Duck",
+    "Enthusiasm": 2.4,
+    "MBOLevel": "B",
+    "Reliability": 3.2,
+    "Total": null
+  },
+  {
+    "Participant": "Alexander Bahrini ",
+    "Enthusiasm": 5,
+    "MBOLevel": "B",
+    "Reliability": 4.3,
+    "Total": 5
+  }
+,
+  {
+    "Participant": "John Doe",
+    "Enthusiasm": 4,
+    "MBOLevel": "C",
+    "Reliability": 4.6,
+    "Total": 2
+  }
+
+  ]
