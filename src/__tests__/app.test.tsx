@@ -6,6 +6,7 @@ import fetchMock from 'jest-fetch-mock';
 
 fetchMock.enableMocks();
 
+// test for rendering app component
 test('renders App component', async () => {
     fetchMock.mockResponseOnce(JSON.stringify([]));
     await act(async () => {

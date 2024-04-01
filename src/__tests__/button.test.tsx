@@ -13,7 +13,7 @@ test('renders Button component', () => {
     expect(buttonElement).toBeInTheDocument();
 });
 
-// test for triggering onClick handler when clicked
+// test for triggering onclick handler when clicked
 test('triggers onClick handler when clicked', () => {
     const onClickMock = jest.fn();
     const { getByText } = render(<Button onClick={onClickMock} disabled={false} />);
@@ -22,7 +22,7 @@ test('triggers onClick handler when clicked', () => {
     expect(onClickMock).toHaveBeenCalled();
 });
 
-// test for disabling Button when disabled prop is true
+// test for disabling button when disabled prop is true
 test('disables Button when disabled prop is true', () => {
     const { getByText } = render(<Button onClick={() => {}} disabled={true} />);
     const buttonElement = getByText('Show information') as HTMLButtonElement; // Type assertion

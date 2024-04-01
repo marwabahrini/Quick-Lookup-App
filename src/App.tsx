@@ -19,7 +19,6 @@ const App: React.FC = () => {
     const [participant, setParticipant] = useState<string | null>(null);
     const [summaryMethod, setSummaryMethod] = useState<string | null>(null);
     const [output, setOutput] = useState<string>('');
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -30,26 +29,23 @@ const App: React.FC = () => {
                 console.error('Error fetching data:', error);
             }
         };
-
         fetchData();
     }, []);
 
+    // handler for the button click
     const handleButtonClick = () => {
         if (!competency || ((selectedOption === 'Participant' && !participant) || (selectedOption === 'Summary Method' && !summaryMethod))) {
             return;
         }
-
         let result = '';
-
         if (selectedOption === 'Participant' && participant) {
             result = handleParticipantSelection();
         } else if (selectedOption === 'Summary Method' && summaryMethod) {
-            result = handleSummaryMethodSelection();
-        }
-
+            result = handleSummaryMethodSelection(); }
         setOutput(result);
     };
 
+    // handler for the participant selection
     const handleParticipantSelection = (): string => {
         const participantData = data.find(item => item.Participant === participant);
         if (participantData) {
@@ -62,9 +58,9 @@ const App: React.FC = () => {
         return '';
     };
 
+    // handler for the summary method selection
     const handleSummaryMethodSelection = (): string => {
         let summary: string | number = '';
-
         switch (summaryMethod) {
             case 'lowest':
                 summary = getLowest();
@@ -81,10 +77,10 @@ const App: React.FC = () => {
             default:
                 break;
         }
-
-        return `The ${summaryMethod} score for ${competency} is ${summary}`;
+        return `The ${summaryMethod}  for ${competency} is ${summary}`;
     };
 
+    // function to get the lowest value
     const getLowest= (): string | number => {
         if (competency === 'Total') {
             const minTotal = Math.min(...data.map(item => parseFloat(item.Total || '0')).filter(value => !isNaN(value)));
@@ -98,6 +94,7 @@ const App: React.FC = () => {
         }
     };
 
+    // function to get the highest value
     const getHighest = (): string | number => {
         if (competency === 'Total') {
             const maxTotal = Math.max(...data.map(item => parseFloat(item.Total || '0')).filter(value => !isNaN(value)));
@@ -111,6 +108,7 @@ const App: React.FC = () => {
         }
     };
 
+    // function to get the average value
     const getAverage = (): string | number => {
         if (competency === 'Total') {
             const totalValues = data.map(item => parseFloat(item.Total || '0')).filter(value => !isNaN(value));
@@ -121,18 +119,20 @@ const App: React.FC = () => {
             const averageASCII = levels.reduce((acc, level) => acc + level!.charCodeAt(0), 0) / levels.length;
             return String.fromCharCode(Math.round(averageASCII));
         } else {
-            const competencyValues = data.map(item => item[competency as keyof DataItem] as number);
+            const competencyValues = data.map(item => item[competency as keyof DataItem] as number).filter(value => !isNaN(value));
             const sum = competencyValues.reduce((acc, val) => acc + val, 0);
             return competencyValues.length > 0 ? Math.ceil((sum / competencyValues.length) * 10) / 10 : '';
         }
     };
 
+    // handler for option change
     const handleOptionChange = (option: 'Participant' | 'Summary Method') => {
         setSelectedOption(option);
         // Reset output when changing options
         setOutput('');
     };
 
+    // rendering the component
     return (
         <div className="container mx-auto p-4">
             <h2 className="text-3xl font-bold text-gray-800 mb-12">Quick Lookup App</h2>
